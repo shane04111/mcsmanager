@@ -2,7 +2,7 @@
 # This script file is specifically designed for the Chinese region, and servers in the Chinese region are used to accelerate file downloads.
 
 mcsmanager_install_path="/opt/mcsmanager"
-mcsmanager_download_addr=$(curl -s https://api.github.com/repos/MCSManager/MCSManager/releases/latest | grep -o 'https://.linux.' | head -n 1)
+mcsmanager_download_url=$(curl -s https://api.github.com/repos/MCSManager/MCSManager/releases/latest | grep -o 'https://.*linux.*\.tar\.gz')
 package_name="mcsmanager_linux_release.tar.gz"
 node="v20.12.2"
 arch=$(uname -m)
@@ -91,8 +91,6 @@ Install_MCSManager() {
   cd "${mcsmanager_install_path}" || Red_Error "[x] Failed to enter ${mcsmanager_install_path}"
 
   # download MCSManager release
-  echo_cyan_n mcsmanager_download_addr
-
   wget "${mcsmanager_download_addr}" -O "${package_name}" || Red_Error "[x] Failed to download MCSManager"
   tar -zxf ${package_name} -o || Red_Error "[x] Failed to untar ${package_name}"
   rm -rf "${mcsmanager_install_path}/${package_name}"
