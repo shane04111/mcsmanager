@@ -1,0 +1,2 @@
+# mcsmanager
+ mcsmanager setup sh
