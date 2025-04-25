@@ -4,7 +4,7 @@
 mcsmanager_install_path="/opt/mcsmanager"
 mcsmanager_download_addr=$(curl -s https://api.github.com/repos/MCSManager/MCSManager/releases/latest | grep -o 'https://.*linux.*\.tar\.gz')
 package_name="mcsmanager_linux_release.tar.gz"
-node="v16.20.2"
+node="v20.12.2"
 arch=$(uname -m)
 
 if [ "$(id -u)" -ne 0]; then
