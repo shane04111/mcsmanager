@@ -47,6 +47,8 @@ Update_Node() {
   if [[ -f "$node_install_path"/bin/node ]] && [[ "$("$node_install_path"/bin/node -v)" == "$node" ]]; then
     echo_green "Node.js version is up-to-date, skipping installation."
     return
+  else
+    echo_red "Node not find, start to install node.js"
   fi
 
   echo_cyan_n "[+] Install Node.JS environment...\n"
@@ -96,18 +98,12 @@ Update_MCSManager() {
   cd "${mcsmanager_install_path}" || Red_Error "[x] Failed to enter ${mcsmanager_install_path}"
 
   # backup data
-  mkdir -p "$mcsmanager_install_path/temp/daemon"
-  mkdir -p "$mcsmanager_install_path/temp/web"
-
-  if [ -d "${mcsmanager_install_path}/daemon/data" ]; then
+  if [ -d "${mcsmanager_install_path}/daemon/data"] && [ -d "${mcsmanager_install_path}/web/data" ]; then
+    mkdir -p "$mcsmanager_install_path/temp/daemon"
+    mkdir -p "$mcsmanager_install_path/temp/web"
+    cp -rf $mcsmanager_install_path/web/data/* $mcsmanager_install_path/temp/web
     cp -rf $mcsmanager_install_path/daemon/data/* $mcsmanager_install_path/temp/daemon
   fi
-
-  if [ -d "${mcsmanager_install_path}/web/data" ]; then
-    cp -rf $mcsmanager_install_path/web/data/* $mcsmanager_install_path/temp/web
-  fi
-
-  find $mcsmanager_install_path -maxdepth 1 -type d \( -not -path './temp*' -and -not -path '..' -and -not -path '.' \) -exec rm -rf {} \;
 
   # download MCSManager release
   wget "${mcsmanager_download_addr}" -O "${package_name}" || Red_Error "[x] Failed to download MCSManager"
@@ -120,15 +116,9 @@ Update_MCSManager() {
     rm -rf $mcsmanager_install_path/mcsmanager
   fi
 
-  if [ -d "${mcsmanager_install_path}/temp/daemon" ]; then
+  if [ -d "${mcsmanager_install_path}/temp/daemon" ] && [ -d "${mcsmanager_install_path}/temp/web" ]; then
     cp -rf $mcsmanager_install_path/temp/daemon/* $mcsmanager_install_path/daemon/data
-  fi
-
-  if [ -d "${mcsmanager_install_path}/temp/web" ]; then
     cp -rf $mcsmanager_install_path/temp/web/* $mcsmanager_install_path/web/data
-  fi
-
-  if [-d "$mcsmanager_install_path/temp"]; then
     rm -rf $mcsmanager_install_path/temp
   fi
 
