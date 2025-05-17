@@ -127,7 +127,7 @@ Update_MCSManager() {
     rm -rf $mcsmanager_install_path/mcsmanager
   fi
 
-  if [ -d "${mcsmanager_install_path}/temp/daemon" ] && ; then
+  if [ -d "${mcsmanager_install_path}/temp/daemon" ] ; then
     cp -rf $mcsmanager_install_path/temp/daemon/* $mcsmanager_install_path/daemon/data
     rm -rf $mcsmanager_install_path/temp/daemon
   fi
