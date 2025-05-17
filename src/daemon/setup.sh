@@ -151,8 +151,6 @@ WantedBy=multi-user.target
   echo_cyan_n "Daemon Address:          "
   echo_yellow "ws://<Your IP>:24444    (Cluster)"
   echo_red "You must expose ports "
-  echo_yellow "23333"
-  echo_red " and "
   echo_yellow "24444"
   echo_red " to use the service properly on the Internet."
   echo_yellow " "

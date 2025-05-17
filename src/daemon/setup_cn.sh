@@ -151,7 +151,7 @@ WantedBy=multi-user.target
   echo_yellow " "
   echo_cyan_n "被控守护进程地址:          "
   echo_yellow "ws://<Your IP>:24444    (Cluster)"
-  echo_red "默认情况下，你必须开放 23333 和 24444 端口才能确保面板工作正常！"
+  echo_red "默认情况下，你必须开放 24444 端口才能确保面板工作正常！"
   echo_yellow " "
   echo_cyan "面板开关指令:"
   echo_cyan "systemctl start mcsm-daemon.service"
